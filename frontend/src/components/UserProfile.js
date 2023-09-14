@@ -125,16 +125,17 @@ export default function UserProfie() {
               key={pics._id}
               src={pics.photo}
               // onClick={() => {
-              //     toggleDetails(pics)
+              //   toggleDetails(pics);
               // }}
               className="item"
+              alt=""
             ></img>
           );
         })}
       </div>
-      {/* {show &&
-        <PostDetail item={posts} toggleDetails={toggleDetails} />
-      } */}
+      {/* {show && <PostDetail item={posts} toggleDetails={toggleDetails} />} */}
+
+      <PostDetail item={posts} />
     </div>
   );
 }

@@ -38,6 +38,7 @@ export default function Createpost() {
         })
         .catch((err) => console.log(err));
     }
+    // eslint-disable-next-line
   }, [url]);
 
   // posting image to cloudinary
@@ -83,6 +84,7 @@ export default function Createpost() {
         <img
           id="output"
           src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
+          alt=""
         />
         <input
           type="file"

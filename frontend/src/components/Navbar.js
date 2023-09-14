@@ -28,11 +28,11 @@ export default function Navbar({ login }) {
     } else {
       return [
         <>
-          <Link to="/signup">
-            <li>SignUp</li>
-          </Link>
           <Link to="/signin">
             <li>SignIn</li>
+          </Link>
+          <Link to="/signup">
+            <li>SignUp</li>
           </Link>
         </>,
       ];
@@ -43,7 +43,11 @@ export default function Navbar({ login }) {
     <Link to="/">
       <div className="navbar">
         {" "}
-        <img src={logo} alt="" />
+        <img
+          src={logo}
+          alt=""
+          style={{ width: "10%", margin: "20px 0 10px  0" }}
+        />
         <ul className="nav-menu">{loginStatus()}</ul>
       </div>
     </Link>
