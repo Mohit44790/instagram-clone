@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PostDetail from "./PostDetail";
+// import PostDetail from "./PostDetail";
 import "./Profile.css";
 import { useParams } from "react-router-dom";
 
@@ -105,7 +105,7 @@ export default function UserProfie() {
           <div className="profile-info" style={{ display: "flex" }}>
             <p>{posts.length} posts</p>
             <p>{user.followers ? user.followers.length : "0"} followers</p>
-            <p>{user.following ? user.following.length : "0"} following</p>
+            <p>{user.following ? user.following.length : "0"} following </p>
           </div>
         </div>
       </div>
@@ -125,7 +125,7 @@ export default function UserProfie() {
               key={pics._id}
               src={pics.photo}
               // onClick={() => {
-              //   toggleDetails(pics);
+              //     toggleDetails(pics)
               // }}
               className="item"
               alt=""
@@ -133,9 +133,9 @@ export default function UserProfie() {
           );
         })}
       </div>
-      {/* {show && <PostDetail item={posts} toggleDetails={toggleDetails} />} */}
-
-      <PostDetail item={posts} />
+      {/* {show &&
+        <PostDetail item={posts} toggleDetails={toggleDetails} />
+      } */}
     </div>
   );
 }

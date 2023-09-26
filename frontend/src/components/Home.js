@@ -33,9 +33,9 @@ export default function Home() {
         console.log(result);
         setData(result);
       })
+
       .catch((err) => console.log(err));
   }, []);
-
   // to show and hide comments
   const toggleComment = (posts) => {
     if (show) {
@@ -147,6 +147,9 @@ export default function Home() {
                 </Link>
               </h5>
             </div>
+            <p className="sharebutton">
+              <span class="material-symbols-outlined">more_horiz</span>
+            </p>
             {/* card image */}
             <div className="card-image">
               <img src={posts.photo} alt="" />
@@ -154,46 +157,81 @@ export default function Home() {
 
             {/* card content */}
             <div className="card-content">
-              {posts.likes.includes(
-                JSON.parse(localStorage.getItem("user"))._id
-              ) ? (
-                <span
-                  className="material-symbols-outlined material-symbols-outlined-red"
-                  onClick={() => {
-                    unlikePost(posts._id);
-                  }}
-                >
-                  favorite
-                </span>
-              ) : (
-                <span
-                  className="material-symbols-outlined"
-                  onClick={() => {
-                    likePost(posts._id);
-                  }}
-                >
-                  favorite
-                </span>
-              )}
+              <ul className="ul">
+                {posts.likes.includes(
+                  JSON.parse(localStorage.getItem("user"))._id
+                ) ? (
+                  <span
+                    className="material-symbols-outlined material-symbols-outlined-red"
+                    onClick={() => {
+                      unlikePost(posts._id);
+                    }}
+                  >
+                    favorite
+                  </span>
+                ) : (
+                  <span
+                    className="material-symbols-outlined"
+                    onClick={() => {
+                      likePost(posts._id);
+                    }}
+                  >
+                    favorite
+                  </span>
+                )}
 
-              <p>{posts.likes.length} Likes</p>
-              <p>{posts.body} </p>
-              <p
-                style={{ fontWeight: "bold", cursor: "pointer" }}
-                onClick={() => {
-                  toggleComment(posts);
-                }}
-              >
-                View all comments
+                <li>
+                  <p
+                    style={{ fontWeight: "bold", cursor: "pointer" }}
+                    onClick={() => {
+                      toggleComment(posts);
+                    }}
+                  >
+                    <span class="material-symbols-outlined">chat</span>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <span class="material-symbols-outlined">send</span>
+                  </p>
+                </li>
+              </ul>
+              <p className="bookmark">
+                <span class="material-symbols-outlined">bookmark</span>
               </p>
+              <div className="postscomment">
+                <p>{posts.likes.length} Likes</p>
+                <p>
+                  <span
+                    style={{
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {posts.postedBy.name}:
+                  </span>{" "}
+                  {posts.body}{" "}
+                </p>
+                <p
+                  style={{
+                    cursor: "pointer",
+                    color: "gray",
+                    fontSize: "13px",
+                  }}
+                  onClick={() => {
+                    toggleComment(posts);
+                  }}
+                >
+                  View all comments
+                </p>
+              </div>
             </div>
 
             {/* add Comment */}
             <div className="add-comment">
-              <span className="material-symbols-outlined">mood</span>
               <input
+                style={{ fontSize: "14px" }}
                 type="text"
-                placeholder="Add a comment"
+                placeholder="Add a comment..."
                 value={comment}
                 onChange={(e) => {
                   setComment(e.target.value);
@@ -205,7 +243,7 @@ export default function Home() {
                   makeComment(comment, posts._id);
                 }}
               >
-                Post
+                <span className="material-symbols-outlined">mood</span>
               </button>
             </div>
           </div>

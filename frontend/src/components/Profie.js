@@ -41,12 +41,12 @@ export default function Profie() {
     )
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         setPic(result.post);
         setUser(result.user);
-        console.log(pic);
+        // console.log(pic);
       });
-  }, []);
+  }, [pic]);
 
   return (
     <div className="profile">
@@ -63,6 +63,10 @@ export default function Profie() {
         {/* profile-data */}
         <div className="pofile-data">
           <h1>{JSON.parse(localStorage.getItem("user")).name}</h1>
+          <p className="verify">
+            <span class="material-symbols-outlined">new_releases</span>
+          </p>
+
           <div className="profile-info" style={{ display: "flex" }}>
             <p>{pic ? pic.length : "0"} posts</p>
             <p>{user.followers ? user.followers.length : "0"} followers</p>
@@ -70,14 +74,26 @@ export default function Profie() {
           </div>
         </div>
       </div>
-      <hr
-        style={{
-          width: "90%",
+      <p className="plusicon">
+        <span className="material-symbols-outlined circle">add_circle</span>
+      </p>
+      <div className="postTags">
+        <hr
+          style={{
+            width: "100%",
 
-          opacity: "0.8",
-          margin: "25px auto",
-        }}
-      />
+            opacity: "0.8",
+            margin: "8px auto",
+          }}
+        />
+        <li className="posts">
+          <ul className="ul1">POSTS</ul>
+          <ul className="ul1">REELS</ul>
+          <ul className="ul1">SAVED</ul>
+          <ul className="ul1">TAGGED</ul>
+        </li>
+      </div>
+
       {/* Gallery */}
       <div className="gallery">
         {pic.map((pics) => {

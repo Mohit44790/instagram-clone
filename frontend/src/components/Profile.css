@@ -12,14 +12,17 @@
   height: fit-content;
 }
 .profile-pic > img {
-  width: 160px;
-  height: 160px;
-  object-fit: contain;
-  border-radius: 100px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+ 
+  /* object-fit: contain; */
+ 
 }
 
 .profile-data {
   text-align: left;
+  
 }
 .profile-info p {
   padding: 0px 5px;
@@ -29,11 +32,12 @@
   display: flex;
   flex-wrap: wrap;
   text-align: center;
+  background-color: black;
 }
 
 .gallery img {
-  width: 30%;
-  margin: 10px;
+  width: 33%;
+  margin: 1px;
 }
 
 .followBtn {
@@ -70,4 +74,28 @@
   font-weight: bolder;
 
   font-size: 15px;
+}
+
+
+.posts{
+  justify-content: center;
+  display:flex;
+}.ul1{
+  padding: 1px 10px;
+  margin: 0px;
+}
+.verify{
+  text-align: right;
+  margin: -52px -3px 0px;
+  color: blue;
+}
+.plusicon{
+text-align: left;
+height: 80px;
+
+
+}
+.circle{
+  font-size: 100px;
+  color: rgb(148, 145, 142);
 }
