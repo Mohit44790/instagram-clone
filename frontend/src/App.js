@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -13,15 +13,25 @@ import { LoginContext } from "./context/LoginContext";
 import Modal from "./components/Modal";
 import UserProfie from "./components/UserProfile";
 import MyFolliwngPost from "./components/MyFollowingPost";
+import { Moreinfo } from "./components/Moreinfo";
+import { Instareels } from "./components/InstaReels/Instareels";
+import { Ytvideo } from "./components/youtube/Ytvideo";
+import MessagingPage from "./components/MessagingPage";
+import ExplorePage from "./components/ExplorePage";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const [userLogin, setUserLogin] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const handleSearch = (query) => {
+    console.log("Search query:", query);
+  };
   return (
     <BrowserRouter>
       <div className="App">
         <LoginContext.Provider value={{ setUserLogin, setModalOpen }}>
           <Navbar login={userLogin} />
+
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/signup" element={<SignUp />}></Route>
@@ -30,6 +40,15 @@ function App() {
             <Route path="/createPost" element={<Createpost />}></Route>
             <Route path="/profile/:userid" element={<UserProfie />}></Route>
             <Route path="/followingpost" element={<MyFolliwngPost />}></Route>
+            <Route path="/moreinfo" element={<Moreinfo />}></Route>
+            <Route path="/insta" element={<Instareels />}></Route>
+            <Route path="/yt" element={<Ytvideo />}></Route>
+            <Route path="/message" element={<MessagingPage />}></Route>
+            <Route path="/explore" element={<ExplorePage />}></Route>
+            <Route
+              path="/search"
+              element={<SearchBar onSearch={handleSearch} />}
+            ></Route>
           </Routes>
           <ToastContainer theme="dark" />
 

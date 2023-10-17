@@ -1,0 +1,40 @@
+/* ExplorePage.css */
+
+.explore-page {
+    padding: 85px;
+    
+  }
+  
+  .post-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    
+  }
+  .post-container img{
+    width: auto;
+    height: 200px;
+  }
+  
+  .post {
+    margin-bottom: 20px;
+    padding: 2px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.2s ease-in-out;
+  
+    /* Style for both image and video posts */
+  }
+  
+  .post:hover {
+    transform: scale(1.05);
+  }
+  
+ 
+  
+  .video video {
+    max-width: 50px;
+    height: 50px;
+  }
+  

@@ -3,6 +3,9 @@ import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import Suggestions from "./Suggestions";
+import Sidenav from "./Sidenav";
+import Stories from "./stories/Stories";
 
 export default function Home() {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
@@ -30,11 +33,12 @@ export default function Home() {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         setData(result);
       })
 
       .catch((err) => console.log(err));
+    // eslint-disable-next-line
   }, []);
   // to show and hide comments
   const toggleComment = (posts) => {
@@ -128,182 +132,124 @@ export default function Home() {
   };
 
   return (
-    <div className="home">
-      {/* card */}
-      {data.map((posts) => {
-        return (
-          <div className="card">
-            {/* card header */}
-            <div className="card-header">
-              <div className="card-pic">
-                <img
-                  src={posts.postedBy.Photo ? posts.postedBy.Photo : picLink}
-                  alt=""
-                />
-              </div>
-              <h5>
-                <Link to={`/profile/${posts.postedBy._id}`}>
-                  {posts.postedBy.name}
-                </Link>
-              </h5>
-            </div>
-            <p className="sharebutton">
-              <span class="material-symbols-outlined">more_horiz</span>
-            </p>
-            {/* card image */}
-            <div className="card-image">
-              <img src={posts.photo} alt="" />
-            </div>
+    <>
+      <div className="homepage__navWraper">
+        <Sidenav />
+      </div>
+      <div className="timeline__right">
+        <Suggestions />
+      </div>
 
-            {/* card content */}
-            <div className="card-content">
-              <ul className="ul">
-                {posts.likes.includes(
-                  JSON.parse(localStorage.getItem("user"))._id
-                ) ? (
-                  <span
-                    className="material-symbols-outlined material-symbols-outlined-red"
-                    onClick={() => {
-                      unlikePost(posts._id);
-                    }}
-                  >
-                    favorite
-                  </span>
-                ) : (
-                  <span
-                    className="material-symbols-outlined"
-                    onClick={() => {
-                      likePost(posts._id);
-                    }}
-                  >
-                    favorite
-                  </span>
-                )}
-
-                <li>
-                  <p
-                    style={{ fontWeight: "bold", cursor: "pointer" }}
-                    onClick={() => {
-                      toggleComment(posts);
-                    }}
-                  >
-                    <span class="material-symbols-outlined">chat</span>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                    <span class="material-symbols-outlined">send</span>
-                  </p>
-                </li>
-              </ul>
-              <p className="bookmark">
-                <span class="material-symbols-outlined">bookmark</span>
-              </p>
-              <div className="postscomment">
-                <p>{posts.likes.length} Likes</p>
-                <p>
-                  <span
-                    style={{
-                      fontWeight: "bold",
-                    }}
-                  >
-                    {posts.postedBy.name}:
-                  </span>{" "}
-                  {posts.body}{" "}
-                </p>
-                <p
-                  style={{
-                    cursor: "pointer",
-                    color: "gray",
-                    fontSize: "13px",
-                  }}
-                  onClick={() => {
-                    toggleComment(posts);
-                  }}
-                >
-                  View all comments
-                </p>
-              </div>
-            </div>
-
-            {/* add Comment */}
-            <div className="add-comment">
-              <input
-                style={{ fontSize: "14px" }}
-                type="text"
-                placeholder="Add a comment..."
-                value={comment}
-                onChange={(e) => {
-                  setComment(e.target.value);
-                }}
-              />
-              <button
-                className="comment"
-                onClick={() => {
-                  makeComment(comment, posts._id);
-                }}
-              >
-                <span className="material-symbols-outlined">mood</span>
-              </button>
-            </div>
-          </div>
-        );
-      })}
-
-      {/* show Comment */}
-      {show && (
-        <div className="showComment">
-          <div className="container">
-            <div className="postPic">
-              <img src={item.photo} alt="" />
-            </div>
-            <div className="details">
+      <div className="home">
+        {/* card */}
+        <Stories />
+        {data.map((posts, index) => {
+          return (
+            <div key={index} className="card">
               {/* card header */}
-              <div
-                className="card-header"
-                style={{ borderBottom: "1px solid #00000029" }}
-              >
+              <div className="card-header">
                 <div className="card-pic">
                   <img
-                    src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8MnwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+                    src={posts.postedBy.Photo ? posts.postedBy.Photo : picLink}
                     alt=""
                   />
                 </div>
-                <h5>{item.postedBy.name}</h5>
+                <h5>
+                  <Link
+                    to={`/profile/${posts.postedBy._id}`}
+                    className="nameone"
+                  >
+                    {posts.postedBy.name}
+                  </Link>
+                </h5>
               </div>
-
-              {/* commentSection */}
-              <div
-                className="comment-section"
-                style={{ borderBottom: "1px solid #00000029" }}
-              >
-                {item.comments.map((comment) => {
-                  return (
-                    <p className="comm">
-                      <span
-                        className="commenter"
-                        style={{ fontWeight: "bolder" }}
-                      >
-                        {comment.postedBy.name}{" "}
-                      </span>
-                      <span className="commentText">{comment.comment}</span>
-                    </p>
-                  );
-                })}
+              <p className="sharebutton">
+                <Link to="/moreinfo">
+                  <span className="material-symbols-outlined">more_horiz</span>
+                </Link>
+              </p>
+              {/* card image */}
+              <div className="card-image">
+                <img src={posts.photo} alt="" />
               </div>
 
               {/* card content */}
               <div className="card-content">
-                <p>{item.likes.length} Likes</p>
-                <p>{item.body}</p>
+                <ul className="ul">
+                  {posts.likes.includes(
+                    JSON.parse(localStorage.getItem("user"))._id
+                  ) ? (
+                    <span
+                      className="material-symbols-outlined material-symbols-outlined-red"
+                      onClick={() => {
+                        unlikePost(posts._id);
+                      }}
+                    >
+                      favorite
+                    </span>
+                  ) : (
+                    <span
+                      className="material-symbols-outlined"
+                      onClick={() => {
+                        likePost(posts._id);
+                      }}
+                    >
+                      favorite
+                    </span>
+                  )}
+
+                  <li>
+                    <p
+                      style={{ fontWeight: "bold", cursor: "pointer" }}
+                      onClick={() => {
+                        toggleComment(posts);
+                      }}
+                    >
+                      <span className="material-symbols-outlined">chat</span>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span className="material-symbols-outlined">send</span>
+                    </p>
+                  </li>
+                </ul>
+                <p className="bookmark">
+                  <span className="material-symbols-outlined">bookmark</span>
+                </p>
+                <div className="postscomment">
+                  <p>{posts.likes.length} Likes</p>
+                  <p>
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {posts.postedBy.name}:
+                    </span>{" "}
+                    {posts.body}{" "}
+                  </p>
+                  <p
+                    style={{
+                      cursor: "pointer",
+                      color: "gray",
+                      fontSize: "13px",
+                    }}
+                    onClick={() => {
+                      toggleComment(posts);
+                    }}
+                  >
+                    View all comments
+                  </p>
+                </div>
               </div>
 
               {/* add Comment */}
               <div className="add-comment">
-                <span className="material-symbols-outlined">mood</span>
                 <input
+                  style={{ fontSize: "14px" }}
                   type="text"
-                  placeholder="Add a comment"
+                  placeholder="Add a comment..."
                   value={comment}
                   onChange={(e) => {
                     setComment(e.target.value);
@@ -312,27 +258,102 @@ export default function Home() {
                 <button
                   className="comment"
                   onClick={() => {
-                    makeComment(comment, item._id);
-                    toggleComment();
+                    makeComment(comment, posts._id);
                   }}
                 >
-                  Post
+                  <span className="material-symbols-outlined">mood</span>
                 </button>
               </div>
             </div>
+          );
+        })}
+
+        {/* show Comment */}
+        {show && (
+          <div className="showComment">
+            <div className="container">
+              <div className="postPic">
+                <img src={item.photo} alt="" />
+              </div>
+              <div className="details">
+                {/* card header */}
+                <div
+                  className="card-header"
+                  style={{ borderBottom: "1px solid #00000029" }}
+                >
+                  <div className="card-pic">
+                    <img src={item.photo} alt="" />
+                  </div>
+                  <h5>{item.postedBy.name}</h5>
+                </div>
+
+                {/* commentSection */}
+                <div
+                  className="comment-section"
+                  style={{ borderBottom: "1px solid #00000029" }}
+                >
+                  {item.comments.map((comment) => {
+                    return (
+                      <>
+                        <div className="comm">
+                          <img src={item.photo} alt="" />
+                        </div>
+                        <p className="commp">
+                          <span
+                            className="commenter"
+                            style={{ fontWeight: "bolder" }}
+                          >
+                            {comment.postedBy.name}{" "}
+                          </span>
+                          <span className="commentText">{comment.comment}</span>
+                        </p>
+                      </>
+                    );
+                  })}
+                </div>
+
+                {/* card content */}
+                <div className="card-content">
+                  <p>{item.likes.length} Likes</p>
+                  <p>{item.body}</p>
+                </div>
+
+                {/* add Comment */}
+                <div className="add-comment">
+                  <span className="material-symbols-outlined">mood</span>
+                  <input
+                    type="text"
+                    placeholder="Add a comment"
+                    value={comment}
+                    onChange={(e) => {
+                      setComment(e.target.value);
+                    }}
+                  />
+                  <button
+                    className="comment"
+                    onClick={() => {
+                      makeComment(comment, item._id);
+                      toggleComment();
+                    }}
+                  >
+                    Post
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              className="close-comment"
+              onClick={() => {
+                toggleComment();
+              }}
+            >
+              <span className="material-symbols-outlined material-symbols-outlined-comment">
+                close
+              </span>
+            </div>
           </div>
-          <div
-            className="close-comment"
-            onClick={() => {
-              toggleComment();
-            }}
-          >
-            <span className="material-symbols-outlined material-symbols-outlined-comment">
-              close
-            </span>
-          </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 }

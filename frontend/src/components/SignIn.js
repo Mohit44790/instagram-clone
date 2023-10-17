@@ -86,7 +86,7 @@ export default function SignIn() {
   };
 
   return (
-    <Component>
+    <Component className="in">
       <Container style={{ marginRight: 50, flexDirection: "row" }}>
         <Box style={{ position: "relative" }}>
           <img src={displayPhone} alt="phone" />

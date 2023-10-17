@@ -1,6 +1,6 @@
 .profile {
   max-width: 600px;
-  margin: 10px auto;
+  margin: 95px auto;
 }
 
 .profile-frame {
@@ -32,12 +32,13 @@
   display: flex;
   flex-wrap: wrap;
   text-align: center;
-  background-color: black;
+
 }
 
 .gallery img {
-  width: 33%;
+  width: 189px;
   margin: 1px;
+  height: 215px;
 }
 
 .followBtn {

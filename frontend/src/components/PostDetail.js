@@ -7,7 +7,7 @@ export default function PostDetail({ item, toggleDetails }) {
   const navigate = useNavigate();
 
   // Toast functions
-  const notifyA = (msg) => toast.error(msg);
+  // const notifyA = (msg) => toast.error(msg);
   const notifyB = (msg) => toast.success(msg);
 
   const removePost = (postId) => {

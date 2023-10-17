@@ -64,7 +64,7 @@ export default function Profie() {
         <div className="pofile-data">
           <h1>{JSON.parse(localStorage.getItem("user")).name}</h1>
           <p className="verify">
-            <span class="material-symbols-outlined">new_releases</span>
+            <span className="material-symbols-outlined">new_releases</span>
           </p>
 
           <div className="profile-info" style={{ display: "flex" }}>

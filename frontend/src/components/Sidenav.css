@@ -1,0 +1,113 @@
+/* Base styles for .sidenav */
+.sidenav {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 1px 5px 5px #e0dcdc;
+  z-index: 1;
+  margin: 76px -8px;
+  width: 262px; /* Set a default width for the sidenav */
+}
+
+.sidenav__logo {
+  width: 120px;
+  margin: 16px;
+  color: black;
+}
+
+.sidenav__buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav__button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: 0;
+  border: 0;
+  margin: 10px 78px 0px 16px;
+  padding: 11px 15px 10px 15px;
+  border-radius: 15px;
+  width: 80%;
+}
+
+.sidenav__button:hover {
+  cursor: pointer;
+  color: rgb(110, 112, 112);
+  background-color: rgba(122, 115, 115, 0.128);
+}
+
+.sidenav__button > span {
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+.sidenav__more {
+  position: fixed;
+  bottom: 3px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .sidenav {
+    width: 100%; /* Make the sidenav full-width on smaller screens */
+    margin: 0; /* Remove margin to center it */
+    height: 100%; /* Make it cover the full height of the screen */
+    top: 0; /* Position it at the top */
+    left: -100%; /* Initially hide it off-screen to the left */
+    transition: left 0.3s ease; /* Add a transition for smoother animation */
+    
+  }
+
+  .sidenav.open {
+    left: 0; /* Move it to the left to show it */
+  }
+  
+}
+@media (max-width: 980px) {
+  .sidenav {
+    width: 100%; /* Make the sidenav full-width on smaller screens */
+    margin: 0; /* Remove margin to center it */
+    height: 100%; /* Make it cover the full height of the screen */
+    top: 0; /* Position it at the top */
+    left: -100%; /* Initially hide it off-screen to the left */
+    transition: left 0.3s ease; /* Add a transition for smoother animation */
+    
+  }
+
+  .sidenav.open {
+    left: 0; /* Move it to the left to show it */
+  }
+  
+}/* ... Your existing CSS ... */
+
+/* Styles for icons placed at the bottom of the page */
+.sidenav__more {
+  position: fixed;
+  bottom: 3px;
+  left: 16px; /* Adjust the left position as needed */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .sidenav {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    transition: left 0.3s ease;
+  }
+
+  .sidenav.open {
+    left: 0;
+  }
+
+  /* Move the icons to the bottom when the sidebar is open */
+  .sidenav.open .sidenav__more {
+    bottom: 0;
+  }
+}
+

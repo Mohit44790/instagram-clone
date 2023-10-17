@@ -1,0 +1,206 @@
+.stories {
+  display: flex;
+  background: var(--white);
+  padding: 28px 4px;
+  width: 100%;
+  border-radius: 3px;
+  overflow: hidden;
+  gap: 10px; /* Add a gap between story elements */
+  justify-content: center; /* Center the story container horizontally */
+  align-items: center; /* Center the story container vertically */
+  position: relative; /* For positioning the buttons */
+}
+
+.stories__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.stories__img {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #f83a63;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stories__img span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.stories__img span img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stories__name {
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+
+.prev,.next{
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background-color: #e6e0e2;
+}
+/* Image preview overlay */
+.image-preview-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgb(0 0 0 / 85%);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 9999;
+cursor: pointer;
+}
+/* Image preview container */
+.image-preview-container {
+max-width: 80%;
+max-height: 80%;
+}
+
+/* Image preview */
+.image-preview img {
+max-width: 100%;
+max-height: 100%;
+display: block;
+margin: 0 auto;
+}
+/* Arrow buttons */
+.arrow {
+font-size: 24px;
+cursor: pointer;
+color: #333;
+margin: 0 8px;
+
+}@media (max-width: 1088px) {
+  .stories {
+    padding: 16px 8px;
+    gap: 8px;
+  }
+  
+  .stories__img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .stories__name {
+    font-size: 10px;
+    margin-top: 2px;
+  }
+}
+@media (max-width: 768px) {
+  .stories {
+    padding: 16px 8px;
+    gap: 8px;
+  }
+  
+  .stories__img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .stories__name {
+    font-size: 10px;
+    margin-top: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stories {
+    padding: 8px 4px;
+    gap: 4px;
+  }
+  
+  .stories__img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .stories__name {
+    font-size: 8px;
+    margin-top: 1px;
+  }
+}
+@media (max-width: 360px) {
+  .stories {
+    padding: 4px 2px;
+    gap: 2px;
+  }
+  
+  .stories__img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .stories__name {
+    font-size: 6px;
+    margin-top: 0.1px;
+  }
+}/* Initial border color for the image preview */
+.image-preview-container {
+  max-width: 100%;
+  max-height: 90%;
+  border: 2px solid transparent; /* Transparent border */
+  transition: border-color 0.3s ease; /* Add a transition for border color */
+  overflow: hidden; /* Hide overflowing content */
+  position: relative;
+}
+
+/* Hover effect for the image preview */
+.image-preview-container:hover {
+  border-color: #0e7477; /* Change border color to red on hover */
+}
+
+/* CSS keyframes for a pulsating border color animation */
+@keyframes pulsate-border {
+  0% {
+    border-color: #ff0000; /* Initial color (red) */
+  }
+  50% {
+    border-color: #00ff00; /* Midpoint color (green) */
+  }
+  100% {
+    border-color: #4c00ff; /* Final color (red) */
+  }
+}
+
+/* Apply the pulsating animation to the image preview on hover */
+.image-preview-container:hover {
+  animation: pulsate-border 2s infinite; /* Apply the pulsating border animation */
+}
+
+/* CSS keyframes for the sliding animation */
+@keyframes moveImage {
+  0% {
+    transform: translateX(0); /* Start position */
+  }
+  100% {
+    transform: translateX(10px); /* End position (adjust as needed) */
+  }
+}
+
+/* Apply the sliding animation to the image preview on hover */
+.image-preview-container:hover .image-preview {
+  animation: moveImage 2s linear infinite alternate; /* Apply the moving animation */
+}
+
+
+
