@@ -1,8 +1,8 @@
 .profile {
+  flex: 4; /* 80% of the available space */
   max-width: 600px;
   margin: 95px auto;
 }
-
 .profile-frame {
   display: flex;
   justify-content: space-evenly;
@@ -99,4 +99,40 @@ height: 80px;
 .circle{
   font-size: 100px;
   color: rgb(148, 145, 142);
+}
+/* Add this CSS in your component's CSS file */
+
+.edite2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-button,
+.View-button,
+.tools-button {
+  background-color: #3897f0; /* Set your desired background color */
+  color: #fff; /* Set your desired text color */
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px; /* Adjust margin as needed */
+  cursor: pointer;
+  border-radius: 5px; /* Add rounded corners */
+  transition: background-color 0.3s; /* Add a smooth transition for background color */
+
+  /* You can add more CSS properties as needed */
+}
+
+.edit-button:hover,
+.View-button:hover,
+.tools-button:hover {
+  background-color: #3576cc; /* Change background color on hover */
+}
+
+/* Styling for the settings icon */
+.FiSettings {
+  font-size: 24px; /* Set the desired font size */
+  color: #333; /* Set your desired color for the icon */
+
+  /* You can add more CSS properties for the icon as needed */
 }

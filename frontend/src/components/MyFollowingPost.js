@@ -155,29 +155,45 @@ export default function MyFolliwngPost() {
 
               {/* card content */}
               <div className="card-content">
-                {posts.likes.includes(
-                  JSON.parse(localStorage.getItem("user"))._id
-                ) ? (
-                  <span
-                    className="material-symbols-outlined material-symbols-outlined-red"
-                    onClick={() => {
-                      unlikePost(posts._id);
-                    }}
-                  >
-                    favorite
-                  </span>
-                ) : (
-                  <span
-                    className="material-symbols-outlined"
-                    onClick={() => {
-                      likePost(posts._id);
-                    }}
-                  >
-                    favorite
-                  </span>
-                )}
+                <ul className="ul">
+                  {posts.likes.includes(
+                    JSON.parse(localStorage.getItem("user"))._id
+                  ) ? (
+                    <span
+                      className="material-symbols-outlined material-symbols-outlined-red"
+                      onClick={() => {
+                        unlikePost(posts._id);
+                      }}
+                    >
+                      favorite
+                    </span>
+                  ) : (
+                    <span
+                      className="material-symbols-outlined"
+                      onClick={() => {
+                        likePost(posts._id);
+                      }}
+                    >
+                      favorite
+                    </span>
+                  )}
 
-                <p>{posts.likes.length} Likes</p>
+                  <li>
+                    <p
+                      style={{ fontWeight: "bold", cursor: "pointer" }}
+                      onClick={() => {
+                        toggleComment(posts);
+                      }}
+                    >
+                      <span className="material-symbols-outlined">chat</span>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <span className="material-symbols-outlined">send</span>
+                    </p>
+                  </li>
+                </ul>
                 <p>{posts.body} </p>
                 <p
                   style={{ fontWeight: "bold", cursor: "pointer" }}

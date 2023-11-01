@@ -19,6 +19,9 @@ import { Ytvideo } from "./components/youtube/Ytvideo";
 import MessagingPage from "./components/MessagingPage";
 import ExplorePage from "./components/ExplorePage";
 import SearchBar from "./components/SearchBar";
+import ReportProblem from "./components/ReportProblem";
+import SettingsPage from "./components/SettingsPage/SettingsPage";
+import EditProfile from "./components/SettingsPage/EditProfile";
 
 function App() {
   const [userLogin, setUserLogin] = useState(false);
@@ -45,6 +48,11 @@ function App() {
             <Route path="/yt" element={<Ytvideo />}></Route>
             <Route path="/message" element={<MessagingPage />}></Route>
             <Route path="/explore" element={<ExplorePage />}></Route>
+            <Route path="/report" element={<ReportProblem />}></Route>
+            <Route path="/settings" element={<SettingsPage />}></Route>
+
+            <Route path="/profile-edit" element={<EditProfile />} />
+
             <Route
               path="/search"
               element={<SearchBar onSearch={handleSearch} />}

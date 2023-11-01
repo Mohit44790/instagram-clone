@@ -1,0 +1,67 @@
+/* CSS for the Report a Problem Form */
+.report-form {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+  }
+  
+  .report-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+  }
+  
+  .report-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .report-form input[type="text"],
+  .report-form input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .report-form textarea {
+    width: 92%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .report-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .report-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .report-form .success-message,
+  .report-form .error-message {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .error-message {
+    color: #ff0000;
+  }
+  
+  /* Additional styles can be added to customize the appearance further */
+  

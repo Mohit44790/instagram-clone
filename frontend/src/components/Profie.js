@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import PostDetail from "./PostDetail";
 import "./Profile.css";
 import ProfilePic from "./ProfilePic";
+import Sidenav from "./Sidenav";
+import { FiSettings } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export default function Profie() {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
@@ -49,69 +52,85 @@ export default function Profie() {
   }, [pic]);
 
   return (
-    <div className="profile">
-      {/* Profile frame */}
-      <div className="profile-frame">
-        {/* profile-pic */}
-        <div className="profile-pic">
-          <img
-            onClick={changeprofile}
-            src={user.Photo ? user.Photo : picLink}
-            alt=""
-          />
-        </div>
-        {/* profile-data */}
-        <div className="pofile-data">
-          <h1>{JSON.parse(localStorage.getItem("user")).name}</h1>
-          <p className="verify">
-            <span className="material-symbols-outlined">new_releases</span>
-          </p>
+    <>
+      <Sidenav />
+      <div className="profile">
+        {/* Profile frame */}
+        <div className="profile-frame">
+          {/* profile-pic */}
+          <div className="profile-pic">
+            <img
+              onClick={changeprofile}
+              src={user.Photo ? user.Photo : picLink}
+              alt=""
+            />
+          </div>
+          {/* profile-data */}
+          <div className="pofile-data">
+            <h1>{JSON.parse(localStorage.getItem("user")).name}</h1>
+            <p className="verify">
+              <span className="material-symbols-outlined">new_releases</span>
+            </p>
+            <div className="edite2">
+              <Link to="/profile-edit">
+                {" "}
+                <button className="edit-button" onClick={changeprofile}>
+                  Edit Profile
+                </button>
+              </Link>
+              <button className="View-button" o>
+                View Archive
+              </button>
+              <button className="tools-button">Ad tools</button>
+              <FiSettings />
+            </div>
 
-          <div className="profile-info" style={{ display: "flex" }}>
-            <p>{pic ? pic.length : "0"} posts</p>
-            <p>{user.followers ? user.followers.length : "0"} followers</p>
-            <p>{user.following ? user.following.length : "0"} following</p>
+            <div className="profile-info" style={{ display: "flex" }}>
+              <p>{pic ? pic.length : "0"} posts</p>
+              <p>{user.followers ? user.followers.length : "0"} followers</p>
+              <p>{user.following ? user.following.length : "0"} following</p>
+            </div>
           </div>
         </div>
-      </div>
-      <p className="plusicon">
-        <span className="material-symbols-outlined circle">add_circle</span>
-      </p>
-      <div className="postTags">
-        <hr
-          style={{
-            width: "100%",
+        <p className="plusicon">
+          <span className="material-symbols-outlined circle">add_circle</span>
+        </p>
+        <div className="postTags">
+          <hr
+            style={{
+              width: "100%",
 
-            opacity: "0.8",
-            margin: "8px auto",
-          }}
-        />
-        <li className="posts">
-          <ul className="ul1">POSTS</ul>
-          <ul className="ul1">REELS</ul>
-          <ul className="ul1">SAVED</ul>
-          <ul className="ul1">TAGGED</ul>
-        </li>
-      </div>
+              opacity: "0.8",
+              margin: "8px auto",
+            }}
+          />
+          <li className="posts">
+            <ul className="ul1">POSTS</ul>
+            <ul className="ul1">REELS</ul>
+            <ul className="ul1">SAVED</ul>
+            <ul className="ul1">TAGGED</ul>
+          </li>
+        </div>
 
-      {/* Gallery */}
-      <div className="gallery">
-        {pic.map((pics) => {
-          return (
-            <img
-              key={pics._id}
-              src={pics.photo}
-              alt=""
-              onClick={() => {
-                toggleDetails(pics);
-              }}
-              className="item"
-            ></img>
-          );
-        })}
+        {/* Gallery */}
+        <div className="gallery">
+          {pic.map((pics) => {
+            return (
+              <img
+                key={pics._id}
+                src={pics.photo}
+                alt=""
+                onClick={() => {
+                  toggleDetails(pics);
+                }}
+                className="item"
+              ></img>
+            );
+          })}
+        </div>
+        {show && <PostDetail item={posts} toggleDetails={toggleDetails} />}
+        {changePic && <ProfilePic changeprofile={changeprofile} />}
       </div>
-      {show && <PostDetail item={posts} toggleDetails={toggleDetails} />}
-      {changePic && <ProfilePic changeprofile={changeprofile} />}
-    </div>
+    </>
   );
 }

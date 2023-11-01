@@ -1,7 +1,7 @@
 /* Base styles for larger screens */
 .suggestions {
   margin-top: 30px;
-  margin-right: 40px;
+  margin-right: 28px;
   position: fixed;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .relation {
-  color: grey;
+  color: rgb(99, 97, 97);
   font-size: 12px;
 }
 
@@ -36,7 +36,7 @@
   font-weight: bold;
   background: 0;
   border: 0;
-  margin-right: 5px;
+  margin-right: -5px;
 }
 
 .follow__button:hover {
@@ -48,7 +48,11 @@
   font-weight: 600;
   font-size: 14px;
 }
-
+.avatar img{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
 /* Media query for smaller screens (e.g., mobile) */
 @media (max-width: 768px) {
   .suggestions {
@@ -66,7 +70,7 @@
   }
 
   .username {
-    font-size: 12px; /* Decrease font size for smaller screens */
+    font-size: 2px; /* Decrease font size for smaller screens */
   }
 }
 @media (max-width: 768px) {

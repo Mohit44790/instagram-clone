@@ -1,0 +1,52 @@
+/* Main settings container */
+.settings-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 50px;
+  /* Set the width distribution */
+}
+
+/* Settings menu (left side) */
+.settings-menu {
+  width: 20%; /* Allocate 20% to the left sidebar */
+  border-right: 1px solid #ccc;
+  padding: 20px;
+}
+
+/* Settings content (right side) */
+.settings-content {
+  width: 80%; /* Allocate 80% to the right content */
+  padding: 20px;
+}
+
+/* Rest of your CSS remains the same */
+.setting-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.setting-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.setting-item p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.setting-item button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.setting-item button:hover {
+  background-color: #0056b3;
+}

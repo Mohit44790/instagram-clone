@@ -144,26 +144,5 @@ router.get("/myfollwingpost", requireLogin, (req, res) => {
       console.log(err);
     });
 });
-//message
-router.get("/messages", async (req, res) => {
-  try {
-    const messages = await Message.find();
-    res.json(messages);
-  } catch (error) {
-    res.status(500).json({ error: "Server error" });
-  }
-});
-
-router.post("/messages", async (req, res) => {
-  const { text, sender } = req.body;
-  const message = new Message({ text, sender });
-
-  try {
-    const savedMessage = await message.save();
-    res.status(201).json(savedMessage);
-  } catch (error) {
-    res.status(500).json({ error: "Server error" });
-  }
-});
 
 module.exports = router;

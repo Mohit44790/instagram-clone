@@ -8,6 +8,7 @@
   z-index: 1;
   margin: 76px -8px;
   width: 262px; /* Set a default width for the sidenav */
+ 
 }
 
 .sidenav__logo {
@@ -15,11 +16,11 @@
   margin: 16px;
   color: black;
 }
-
+/* 
 .sidenav__buttons {
   display: flex;
   flex-direction: column;
-}
+} */
 
 .sidenav__button {
   display: flex;
@@ -31,6 +32,7 @@
   padding: 11px 15px 10px 15px;
   border-radius: 15px;
   width: 80%;
+  
 }
 
 .sidenav__button:hover {
@@ -111,3 +113,53 @@
   }
 }
 
+
+
+
+
+
+.sidenav__button:hover{
+  background: #03e9f4;
+  color: #050801;
+  box-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 200px #03e9f4;
+   -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+}
+
+/* Add this to your existing CSS or create a new CSS file */
+.sidenav__more-button {
+  position: relative;
+}
+
+.sidenav {
+  /* Your existing styles for .sidenav */
+
+  .more-menu {
+    position: absolute;
+    top: 26%;
+    left: 36%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .more-menu-item {
+    margin: 8px 0;
+    padding: 8px 16px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .more-menu-item:hover {
+    background-color: #f0f0f0;
+  }
+}

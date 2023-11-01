@@ -14,6 +14,7 @@ export default function Home() {
   const [comment, setComment] = useState("");
   const [show, setShow] = useState(false);
   const [item, setItem] = useState([]);
+  const [showShareOptions, setShowShareOptions] = useState(false); // State for share options
 
   // Toast functions
   // const notifyA = (msg) => toast.error(msg);
@@ -131,6 +132,39 @@ export default function Home() {
       });
   };
 
+  // Function to toggle the share options
+  const toggleShareOptions = () => {
+    setShowShareOptions(!showShareOptions);
+  };
+  // Function to handle sharing
+  const handleShare = (option) => {
+    // Implement logic for each share option here
+    if (option === "status") {
+      // Share as a status
+      // Add your code here
+    } else if (option === "users") {
+      // Share with specific users
+      // Add your code here
+    } else if (option === "whatsapp") {
+      const postLink = "https://web.whatsapp.com/"; // Replace with the actual post link
+      const message = `Check out this post: ${postLink}`;
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank");
+      notifyB("Shared via WhatsApp");
+    } else if (option === "mail") {
+      const email = prompt("Enter an email address:");
+      if (email) {
+        // Send an email to the specified address
+        const emailContent = "https://www.google.com/gmail/about/"; // Replace with the actual post link
+        window.location.href = `mailto:${email}?subject=Check out this post&body=${emailContent}`;
+        notifyB("Email sent successfully");
+      }
+    }
+    // You can add more share options and their respective logic.
+    // After sharing, you can close the share options:
+    setShowShareOptions(false);
+  };
+
   return (
     <>
       <div className="homepage__navWraper">
@@ -209,8 +243,15 @@ export default function Home() {
                     </p>
                   </li>
                   <li>
-                    <p>
-                      <span className="material-symbols-outlined">send</span>
+                    <p className="share-button">
+                      <span
+                        style={{ fontWeight: "bold", cursor: "pointer" }}
+                        onClick={() => {
+                          toggleShareOptions(); // Add this line to toggle the share options
+                        }}
+                      >
+                        <span className="material-symbols-outlined">send</span>
+                      </span>
                     </p>
                   </li>
                 </ul>
@@ -267,7 +308,17 @@ export default function Home() {
             </div>
           );
         })}
-
+        {/* Share options */}
+        {showShareOptions && (
+          <div className="share-options">
+            <div onClick={() => handleShare("status")}>Share as Status</div>
+            <div onClick={() => handleShare("users")}>Share with Users</div>
+            <div onClick={() => handleShare("whatsapp")}>
+              Share via WhatsApp
+            </div>
+            <div onClick={() => handleShare("mail")}>Share via Email</div>
+          </div>
+        )}
         {/* show Comment */}
         {show && (
           <div className="showComment">

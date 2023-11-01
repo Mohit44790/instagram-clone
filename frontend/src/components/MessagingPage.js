@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from "react";
-
-const MessagingPage = () => {
+import React, { useEffect, useState } from "react";
+import "./MessagingPage.css";
+function Message() {
   const [messages, setMessages] = useState([]);
+
   const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
-    // Fetch messages from the server using the native fetch method
-    fetch("http://localhost:5000/messages")
+    // Fetch messages from the server
+    fetch("http://localhost:5000/messages", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(
-            `Fetch error: ${response.status} - ${response.statusText}`
-          );
+          throw new Error("Network response was not ok");
         }
         return response.json();
       })
@@ -23,37 +27,41 @@ const MessagingPage = () => {
       });
   }, []);
 
-  const handleSendMessage = () => {
-    // Send a new message to the server using the native fetch method
-    fetch("/api/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({ text: newMessage, sender: "User" }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
+  const handleSendMessage = (id) => {
+    if (newMessage.trim() !== "") {
+      // Send a new message to the server
+      fetch("http://localhost:5000/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"), // Replace with your actual access token
+        },
+        body: JSON.stringify({ text: newMessage, sender: "User" }),
       })
-      .then((data) => {
-        setMessages([...messages, data]);
-        setNewMessage("");
-      })
-      .catch((error) => {
-        console.error("Fetch error:", error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setMessages([...messages, data]);
+          setNewMessage("");
+        })
+        .catch((error) => {
+          console.error("Fetch error:", error);
+        });
+    }
   };
 
   return (
-    <div>
-      <div className="messages-container">
-        {messages.map((message) => (
-          <div key={message._id} className="message">
-            <span className="message-sender">{message.sender}:</span>{" "}
+    <div className="message-box">
+      <div className="message-header">
+        <span>Chat with Someone</span>
+      </div>
+      <div className="message-content">
+        {messages.map((message, index) => (
+          <div key={index} className={message.sentByUser ? "user" : "other"}>
             {message.text}
           </div>
         ))}
@@ -61,14 +69,14 @@ const MessagingPage = () => {
       <div className="message-input">
         <input
           type="text"
-          placeholder="Type your message..."
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
+          placeholder="Type a message..."
         />
         <button onClick={handleSendMessage}>Send</button>
       </div>
     </div>
   );
-};
+}
 
-export default MessagingPage;
+export default Message;

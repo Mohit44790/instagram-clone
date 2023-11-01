@@ -72,5 +72,88 @@ router.post("/signin", (req, res) => {
       .catch((err) => console.log(err));
   });
 });
+router.put("/updateuser", requireLogin, (req, res) => {
+  const { name, email, userName, password, phone, bio, website } = req.body;
+
+  // Optional: You can add validation to ensure at least one field is being updated.
+  // if (!name && !email && !userName && !password) {
+  //   return res.status(422).json({ error: "Please provide at least one field to update" });
+  // }
+
+  // Create an object to store the updated user data
+  const updatedUser = {};
+
+  // Update the fields in the updatedUser object as needed
+  if (name) updatedUser.name = name;
+  if (email) updatedUser.email = email;
+  if (userName) updatedUser.userName = userName;
+  if (phone) updatedUser.phone = phone;
+  if (bio) updatedUser.bio = bio;
+  if (website) updatedUser.website = website;
+
+  // If a new password is provided, hash and update the password
+  if (password) {
+    bcrypt.hash(password, 12).then((hashedPassword) => {
+      updatedUser.password = hashedPassword;
+
+      // Update the user data in the database
+      USER.findByIdAndUpdate(
+        req.user._id, // Get the authenticated user's ID from the token
+        { $set: updatedUser },
+        { new: true },
+        (err, result) => {
+          if (err) {
+            return res
+              .status(422)
+              .json({ error: "Failed to update user data" });
+          }
+          // You can generate a new JWT token and return updated user data as needed
+          const token = jwt.sign({ _id: result._id }, Jwt_secret);
+          const { _id, name, email, userName, phone, bio, website } = result;
+          res.json({
+            token,
+            user: { _id, name, email, userName, phone, bio, website },
+          });
+        }
+      );
+    });
+  } else {
+    // Update the user data without changing the password
+    USER.findByIdAndUpdate(
+      req.user._id,
+      { $set: updatedUser },
+      { new: true },
+      (err, result) => {
+        if (err) {
+          return res.status(422).json({ error: "Failed to update user data" });
+        }
+        // You can generate a new JWT token and return updated user data as needed
+        const token = jwt.sign({ _id: result._id }, Jwt_secret);
+        const { _id, name, email, userName, phone, bio, website } = result;
+        res.json({
+          token,
+          user: { _id, name, email, userName, phone, bio, website },
+        });
+      }
+    );
+  }
+});
+
+// Fetch new and saved users
+router.get("/suggestions", requireLogin, (req, res) => {
+  USER.find({ isNewUser: true }).exec((err, newUsers) => {
+    if (err) {
+      return res.status(422).json({ error: "Failed to fetch new users" });
+    }
+
+    USER.find({ isNewUser: false }).exec((err, savedUsers) => {
+      if (err) {
+        return res.status(422).json({ error: "Failed to fetch saved users" });
+      }
+
+      res.json({ newUsers, savedUsers });
+    });
+  });
+});
 
 module.exports = router;

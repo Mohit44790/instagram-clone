@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Sidenav.css";
+import Notifications from "./Notifications";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import ExploreIcon from "@mui/icons-material/Explore";
@@ -15,6 +16,28 @@ import logo from "../img/logo.png";
 
 function Sidenav() {
   const { setModalOpen } = useContext(LoginContext);
+  const [notifications, setNotifications] = useState([]);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
+
+  const handleNotificationClick = () => {
+    setIsNotificationOpen(!isNotificationOpen);
+  };
+
+  const closeNotificationPanel = () => {
+    setIsNotificationOpen(false);
+  };
+  const toggleMoreMenu = () => {
+    setIsMoreMenuOpen(!isMoreMenuOpen);
+  };
+
+  const handleLogout = () => {
+    // Add your logout logic here, e.g., clearing user session, redirecting, etc.
+    // Example: clear user session
+    localStorage.removeItem("jwt"); // Remove the JWT token or perform the necessary actions for user logout
+    // Redirect to the login page or perform other actions as needed
+    window.location.href = "/signin";
+  };
 
   return (
     <div className="sidenav">
@@ -46,19 +69,19 @@ function Sidenav() {
           </button>
         </Link>
         <Link to="/insta">
-          <button className="sidenav__button">
+          <button className="sidenav__button glowing-button">
             <SlideshowIcon />
             <span>Reels</span>
           </button>
         </Link>
         <Link to="/message">
           {" "}
-          <button className="sidenav__button">
+          <button className="sidenav__button glowing-button">
             <ChatIcon />
             <span>Messages</span>
           </button>
         </Link>
-        <button className="sidenav__button">
+        <button className="sidenav__button" onClick={handleNotificationClick}>
           <FavoriteBorderIcon />
           <span>Notifications</span>
         </button>
@@ -70,15 +93,33 @@ function Sidenav() {
           </button>{" "}
         </Link>
 
-        <button className="sidenav__button">
+        <button className="sidenav__button" onClick={toggleMoreMenu}>
           <MenuIcon />
-          <span
-            className="sidenav__buttonText"
-            onClick={() => setModalOpen(true)}
-          >
-            More
-          </span>
+          <span>More</span>
         </button>
+        {isNotificationOpen && (
+          <Notifications
+            notifications={notifications}
+            onClose={closeNotificationPanel}
+          />
+        )}
+        {isMoreMenuOpen && (
+          <div className="more-menu">
+            <Link to="/settings">
+              <button className="more-menu-item">Settings</button>
+            </Link>
+            <button className="more-menu-item">Your Activity</button>
+            <button className="more-menu-item">Saved</button>
+            <button className="more-menu-item">Switch Appearance</button>
+            <Link to="/report">
+              <button className="more-menu-item">Report a Problem</button>
+            </Link>
+            <button className="more-menu-item">Switch Account</button>
+            <button className="more-menu-item" onClick={() => handleLogout()}>
+              Logout
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

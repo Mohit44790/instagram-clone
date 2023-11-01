@@ -20,9 +20,23 @@ const userSchema = new mongoose.Schema({
   },
   Photo: {
     type: String,
+    // This field can store the URL of the user's profile picture.
   },
   followers: [{ type: ObjectId, ref: "USER" }],
   following: [{ type: ObjectId, ref: "USER" }],
+  // Additional fields for user profile
+
+  website: {
+    type: String,
+    // You can add validation or default values as needed.
+  },
+  bio: {
+    type: String,
+    // You can add validation or default values as needed.
+  },
+  phone: {
+    type: String,
+  },
 });
 
 mongoose.model("USER", userSchema);

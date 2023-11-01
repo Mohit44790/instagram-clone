@@ -1,40 +1,80 @@
-/* ExplorePage.css */
-
-.explore-page {
-    padding: 85px;
-    
-  }
-  
-  .post-container {
-    display: flex;
-    flex-wrap: wrap;
-    /* justify-content: space-between; */
-    
-  }
-  .post-container img{
-    width: auto;
-    height: 200px;
-  }
-  
-  .post {
-    margin-bottom: 20px;
-    padding: 2px;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    transition: transform 0.2s ease-in-out;
-  
-    /* Style for both image and video posts */
-  }
-  
-  .post:hover {
-    transform: scale(1.05);
-  }
-  
+/* explore-page1 container */
+.explore-page1 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
  
-  
-  .video video {
-    max-width: 50px;
-    height: 50px;
-  }
-  
+  margin: 119px 50px 38px 355px;
+ 
+}
+
+/* Individual post card */
+.card1 {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+/* Show like, view, and comment buttons when hovering over the card */
+.card1:hover .like-comment-buttons1 {
+  display: flex;
+}
+
+/* Card header with user information */
+.card-header1 {
+  display: flex;
+  align-items: center;
+  margin-top: -46px;
+}
+
+/* User profile picture */
+
+/* Like, view, and comment buttons container */
+.like-comment-buttons1 {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+color: white;
+  /* border-radius: 50%; */
+  padding: 10px;
+  /* backdrop-filter: blur(5px); */
+  cursor: pointer;
+}
+
+/* Like, view, and comment buttons text */
+.like-comment-buttons1 button {
+  background: transparent;
+  border: none;
+  font-size: 10px;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.count1 {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  font-weight: bold;
+}
+
+/* Card content, including the post image */
+.card-image1 img {
+  width:310px;
+  height: 350px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+}
+
+/* User name link */
+.nameone1 {
+  text-decoration: none;
+  color: #000;
+}
+
+/* Text content below the image (e.g., post description) */
+.card-content1 {
+  text-align: center;
+  margin: 10px;
+}
