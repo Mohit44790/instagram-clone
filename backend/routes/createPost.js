@@ -16,23 +16,29 @@ router.get("/allposts", requireLogin, (req, res) => {
 });
 
 router.post("/createPost", requireLogin, (req, res) => {
-  const { body, pic } = req.body;
-  console.log(pic);
-  if (!body || !pic) {
+  const { body, photo, mediaType } = req.body; // Use 'photo' instead of 'pic'
+
+  if (!body || !photo || !mediaType) {
     return res.status(422).json({ error: "Please add all the fields" });
   }
-  console.log(req.user);
+
   const post = new POST({
     body,
-    photo: pic,
+    photo, // Use 'photo' instead of 'pic'
+    mediaType,
+
     postedBy: req.user,
   });
+
   post
     .save()
     .then((result) => {
       return res.json({ post: result });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({ error: "Failed to create a post" });
+    });
 });
 
 router.get("/myposts", requireLogin, (req, res) => {

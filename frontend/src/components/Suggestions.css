@@ -53,6 +53,19 @@
   width: 40px;
   border-radius: 50%;
 }
+.footer-suggestion {
+  margin-top: 25px;
+
+  flex: 1;
+}
+
+.footer-suggestion p {
+  font-size: 12px;
+  color: var(--tertiary);
+
+  margin-bottom: 15px;
+  cursor: pointer;
+}
 /* Media query for smaller screens (e.g., mobile) */
 @media (max-width: 768px) {
   .suggestions {

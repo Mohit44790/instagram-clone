@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function Createpost() {
   const [body, setBody] = useState("");
-  const [image, setImage] = useState("");
+  const [media, setMedia] = useState(null); // To store image or video file
+  const [mediaType, setMediaType] = useState(""); // To distinguish between image and video
   const [url, setUrl] = useState("");
   const navigate = useNavigate();
 
@@ -14,17 +15,18 @@ export default function Createpost() {
   const notifyB = (msg) => toast.success(msg);
 
   useEffect(() => {
-    // saving post to mongodb
+    // Saving post to MongoDB
     if (url) {
       fetch("http://localhost:5000/createPost", {
         method: "post",
         headers: {
-          "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("jwt"),
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          body,
-          pic: url,
+          body: body, // Make sure 'body' has a value
+          photo: url, // Make sure 'url' has a value
+          mediaType, // Include media type in the request
         }),
       })
         .then((res) => res.json())
@@ -41,33 +43,46 @@ export default function Createpost() {
     // eslint-disable-next-line
   }, [url]);
 
-  // posting image to cloudinary
+  // Posting image or video to Cloudinary
   const postDetails = () => {
-    console.log(body, image);
+    console.log(body, media);
     const data = new FormData();
-    data.append("file", image);
+    data.append("file", media);
     data.append("upload_preset", "insta-cloneMK");
-    data.append("cloud_name", "codermk1");
-    fetch("https://api.cloudinary.com/v1_1/codermk1/image/upload", {
+
+    // Check if media is an image or a video and set the upload URL accordingly
+    const cloudinaryURL =
+      mediaType === "image"
+        ? "https://api.cloudinary.com/v1_1/codermk1/image/upload"
+        : "https://api.cloudinary.com/v1_1/codermk1/video/upload";
+
+    fetch(cloudinaryURL, {
       method: "post",
       body: data,
     })
       .then((res) => res.json())
-      .then((data) => setUrl(data.url))
+      .then((data) => {
+        setUrl(data.secure_url); // Use 'secure_url' for Cloudinary video uploads
+      })
       .catch((err) => console.log(err));
-    console.log(url);
   };
 
-  const loadfile = (event) => {
-    var output = document.getElementById("output");
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.onload = function () {
-      URL.revokeObjectURL(output.src); // free memory
-    };
+  // Handle file input change and set media type
+  const handleMediaChange = (event) => {
+    const file = event.target.files[0];
+    setMedia(file);
+    if (file) {
+      if (file.type.startsWith("image")) {
+        setMediaType("image");
+      } else if (file.type.startsWith("video")) {
+        setMediaType("video");
+      }
+    }
   };
+
   return (
     <div className="createPost">
-      {/* //header */}
+      {/* Header */}
       <div className="post-header">
         <h4 style={{ margin: "3px auto" }}>Create New Post</h4>
         <button
@@ -79,23 +94,26 @@ export default function Createpost() {
           Share
         </button>
       </div>
-      {/* image preview */}
+      {/* Image or Video Preview */}
       <div className="main-div">
-        <img
-          id="output"
-          src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
-          alt="img"
-        />
+        {mediaType === "image" ? (
+          <img
+            id="output"
+            src={media ? URL.createObjectURL(media) : ""}
+            alt="img"
+          />
+        ) : mediaType === "video" ? ( // Use 'video' element for video
+          <video id="output" controls>
+            <source src={media ? URL.createObjectURL(media) : ""} />
+          </video>
+        ) : null}
         <input
           type="file"
-          accept="image/*"
-          onChange={(event) => {
-            loadfile(event);
-            setImage(event.target.files[0]);
-          }}
+          accept="image/*, video/*"
+          onChange={handleMediaChange}
         />
       </div>
-      {/* details */}
+      {/* Details */}
       <div className="details">
         <div className="card-header">
           <div className="card-pic">

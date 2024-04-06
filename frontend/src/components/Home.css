@@ -9,6 +9,7 @@
 /* Default styles for .home */
 .home {
   margin: 55px auto;
+  width: 60%;
 }
 
 /* Default styles for .card-header */
@@ -190,12 +191,14 @@ li {
   width: 265px;
   height: 100%;
   margin: 54px;
+  /* width: 30%; */
 }
 
 /* Default styles for .homepage__navWraper */
 .homepage__navWraper {
   position: relative;
   flex: 0.2;
+ 
 }
 
 /* Default styles for .comm img */

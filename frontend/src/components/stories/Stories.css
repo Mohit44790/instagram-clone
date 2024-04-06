@@ -6,10 +6,11 @@
   border-radius: 3px;
   overflow: hidden;
   gap: 10px; /* Add a gap between story elements */
-  justify-content: center; /* Center the story container horizontally */
+  justify-content: flex-start; /* Align stories to the left */
   align-items: center; /* Center the story container vertically */
   /* position: relative;  */
 }
+
 
 .stories__info {
   display: flex;
@@ -18,7 +19,7 @@
   cursor: pointer;
 }
 
-.stories__img {
+.stories__img  {
   width: 66px;
   height: 66px;
   border-radius: 50%;
@@ -28,6 +29,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.add-story{
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #f83a63;
+ 
 }
 
 .stories__img span {

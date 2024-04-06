@@ -124,9 +124,18 @@ function Suggestions() {
           </button>
         )}
       </div>
-      <div className="instagram-meta">
+      {/* <div className="instagram-meta">
         <p>© 2023 INSTAGRAM FROM META</p>
-      </div>
+      </div> */}
+      <footer className="footer-suggestion">
+        <p>
+          About &bull; Help &bull; API &bull; Jobs &bull; Privacy &bull; Terms
+          &bull; Location &bull; Language &bull; Meta verified &bull; Hashtags
+          &bull; India
+        </p>
+
+        <p>&copy; 2023 INSTAGRAM FROM META</p>
+      </footer>
     </div>
   );
 }

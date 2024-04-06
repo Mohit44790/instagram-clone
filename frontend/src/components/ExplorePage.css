@@ -2,16 +2,28 @@
 .explore-page1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
- 
   margin: 119px 50px 38px 355px;
- 
+  
 }
+
 
 /* Individual post card */
 .card1 {
   position: relative;
   cursor: pointer;
   transition: transform 0.2s;
+}
+
+/* Add a light black overlay when hovering over the card */
+.card1:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Adjust the opacity (last value) as needed */
+  z-index: 1; /* Ensure it's above the card content */
 }
 
 /* Show like, view, and comment buttons when hovering over the card */
@@ -35,10 +47,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-color: white;
-  /* border-radius: 50%; */
+  color: white;
   padding: 10px;
-  /* backdrop-filter: blur(5px); */
   cursor: pointer;
 }
 
@@ -61,7 +71,7 @@ color: white;
 
 /* Card content, including the post image */
 .card-image1 img {
-  width:310px;
+  width: 310px;
   height: 350px;
   cursor: pointer;
   border: 1px solid #ddd;
