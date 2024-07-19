@@ -5,7 +5,7 @@ export default function ProfilePic({ changeprofile }) {
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
 
-  // posting image to cloudinary
+  // Posting image to Cloudinary
   const postDetails = () => {
     const data = new FormData();
     data.append("file", image);
@@ -18,11 +18,10 @@ export default function ProfilePic({ changeprofile }) {
       .then((res) => res.json())
       .then((data) => setUrl(data.url))
       .catch((err) => console.log(err));
-    console.log(url);
   };
 
   const postPic = () => {
-    // saving post to mongodb
+    // Saving post to MongoDB
     fetch("http://localhost:5000/uploadProfilePic", {
       method: "put",
       headers: {
@@ -51,21 +50,21 @@ export default function ProfilePic({ changeprofile }) {
       postDetails();
     }
   }, [image]);
+
   useEffect(() => {
     if (url) {
       postPic();
     }
   }, [url]);
+
   return (
-    <div className="profilePic darkBg">
-      <div className="changePic centered">
-        <div>
-          <h2>Change Profile Photo</h2>
-        </div>
-        <div style={{ borderTop: "1px solid #00000030" }}>
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-70">
+      <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+        <h2 className="text-xl font-semibold mb-4">Change Profile Photo</h2>
+        
+        <div className="border-t border-gray-300 py-2">
           <button
-            className="upload-btn"
-            style={{ color: "#1EA1F7" }}
+            className="text-blue-500 hover:underline"
             onClick={handleClick}
           >
             Upload Photo
@@ -74,36 +73,29 @@ export default function ProfilePic({ changeprofile }) {
             type="file"
             ref={hiddenFileInput}
             accept="image/*"
-            style={{ display: "none" }}
-            onChange={(e) => {
-              setImage(e.target.files[0]);
-            }}
+            className="hidden"
+            onChange={(e) => setImage(e.target.files[0])}
           />
         </div>
-        <div style={{ borderTop: "1px solid #00000030" }}>
+        
+        <div className="border-t border-gray-300 py-2">
           <button
-            className="upload-btn"
+            className="text-red-500 hover:underline"
             onClick={() => {
               setUrl(null);
               postPic();
             }}
-            style={{ color: "#ED4956" }}
           >
-            {" "}
             Remove Current Photo
           </button>
         </div>
-        <div style={{ borderTop: "1px solid #00000030" }}>
+        
+        <div className="border-t border-gray-300 py-2">
           <button
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              fontSize: "15px",
-            }}
+            className="text-gray-600 hover:underline"
             onClick={changeprofile}
           >
-            cancel
+            Cancel
           </button>
         </div>
       </div>

@@ -24,70 +24,6 @@ router.get("/user/:id", (req, res) => {
     });
 });
 
-// to follow user
-router.put("/follow", requireLogin, (req, res) => {
-  USER.findByIdAndUpdate(
-    req.body.followId,
-    {
-      $push: { followers: req.user._id },
-    },
-    {
-      new: true,
-    },
-    (err, result) => {
-      if (err) {
-        return res.status(422).json({ error: err });
-      }
-      USER.findByIdAndUpdate(
-        req.user._id,
-        {
-          $push: { following: req.body.followId },
-        },
-        {
-          new: true,
-        }
-      )
-        .then((result) => {
-          res.json(result);
-        })
-        .catch((err) => {
-          return res.status(422).json({ error: err });
-        });
-    }
-  );
-});
-
-// to unfollow user
-router.put("/unfollow", requireLogin, (req, res) => {
-  USER.findByIdAndUpdate(
-    req.body.followId,
-    {
-      $pull: { followers: req.user._id },
-    },
-    {
-      new: true,
-    },
-    (err, result) => {
-      if (err) {
-        return res.status(422).json({ error: err });
-      }
-      USER.findByIdAndUpdate(
-        req.user._id,
-        {
-          $pull: { following: req.body.followId },
-        },
-        {
-          new: true,
-        }
-      )
-        .then((result) => res.json(result))
-        .catch((err) => {
-          return res.status(422).json({ error: err });
-        });
-    }
-  );
-});
-
 // to upload profile pic
 router.put("/uploadProfilePic", requireLogin, (req, res) => {
   USER.findByIdAndUpdate(
@@ -105,23 +41,6 @@ router.put("/uploadProfilePic", requireLogin, (req, res) => {
       res.json(result);
     }
   });
-});
-router.post("/search-users", requireLogin, async (req, res) => {
-  try {
-    const userPattern = new RegExp("^" + req.body.query);
-
-    // Find users whose email matches the search query and are not already followed by the authenticated user
-    const users = await USER.find({
-      email: { $regex: userPattern },
-      _id: { $ne: req.user._id }, // Exclude the authenticated user
-      followers: { $ne: req.user._id }, // Exclude users who are already followed by the authenticated user
-    }).select("_id email");
-
-    res.json({ users });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal server error" });
-  }
 });
 
 module.exports = router;
