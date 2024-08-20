@@ -1,4 +1,4 @@
 module.exports = {
-  mongoUrl: "mongodb://localhost:27017/instagam",
-  Jwt_secret: "faslkfocvneofu",
+  mongoUrl: process.env.MONGO_URI,
+  Jwt_secret: process.env.JWT_SECRET,
 };
