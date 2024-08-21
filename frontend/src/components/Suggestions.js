@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./Suggestions.css";
 import { Link } from "react-router-dom";
+import { SERVER } from "./constants/server";
 
 function Suggestions() {
   const [newUsers, setNewUsers] = useState([]);
   const [showMore, setShowMore] = useState(false);
   const [userFollowState, setUserFollowState] = useState({});
+
+  const currentYear = new Date().getFullYear();
 
   useEffect(() => {
     // Load the follow state from local storage
@@ -15,7 +18,7 @@ function Suggestions() {
     }
 
     // Make an API request to fetch new and saved users
-    fetch("http://localhost:5000/suggestions", {
+    fetch(`${SERVER}/suggestions`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -39,7 +42,7 @@ function Suggestions() {
   };
 
   const followUser = (userId) => {
-    fetch("http://localhost:5000/follow", {
+    fetch(`${SERVER}/follow`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +60,7 @@ function Suggestions() {
   };
 
   const unfollowUser = (userId) => {
-    fetch("http://localhost:5000/unfollow", {
+    fetch(`${SERVER}/unfollow`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -134,7 +137,7 @@ function Suggestions() {
           &bull; India
         </p>
 
-        <p>&copy; 2023 INSTAGRAM FROM META</p>
+        <p>&copy; {currentYear} INSTAGRAM FROM META</p>
       </footer>
     </div>
   );

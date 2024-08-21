@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import "./Stories.css";
+import { SERVER } from "../constants/server";
 
 const Stories = () => {
   const [sliderData, setSliderData] = useState([]);
@@ -16,7 +17,7 @@ const Stories = () => {
 
   useEffect(() => {
     // Fetch stories from the server
-    fetch("http://localhost:5000/stories", {
+    fetch(`${SERVER}/stories`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -87,7 +88,7 @@ const Stories = () => {
       };
 
       // Add the new story to the database
-      fetch("http://localhost:5000/stories", {
+      fetch(`${SERVER}/stories`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

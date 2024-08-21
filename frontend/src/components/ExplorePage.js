@@ -3,6 +3,7 @@ import "./ExplorePage.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Sidenav from "./Sidenav";
+import { SERVER } from "./constants/server";
 
 const ExplorePage = () => {
   const [posts, setPosts] = useState([]);
@@ -17,7 +18,7 @@ const ExplorePage = () => {
       return;
     }
 
-    fetch("http://localhost:5000/allposts", {
+    fetch(`${SERVER}/allposts`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./MessagingPage.css";
+import { SERVER } from "./constants/server";
 function Message() {
   const [messages, setMessages] = useState([]);
 
@@ -7,7 +8,7 @@ function Message() {
 
   useEffect(() => {
     // Fetch messages from the server
-    fetch("http://localhost:5000/messages", {
+    fetch(`${SERVER}/messages`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -30,7 +31,7 @@ function Message() {
   const handleSendMessage = (id) => {
     if (newMessage.trim() !== "") {
       // Send a new message to the server
-      fetch("http://localhost:5000/messages", {
+      fetch(`${SERVER}/messages`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

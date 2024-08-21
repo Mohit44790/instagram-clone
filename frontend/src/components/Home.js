@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Suggestions from "./Suggestions";
 import Sidenav from "./Sidenav";
 import Stories from "./stories/Stories";
+import { SERVER } from "./constants/server";
 
 export default function Home() {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
@@ -27,7 +28,7 @@ export default function Home() {
     }
 
     // Fetching all posts
-    fetch("http://localhost:5000/allposts", {
+    fetch(`${SERVER}/allposts`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -52,7 +53,7 @@ export default function Home() {
   };
 
   const likePost = (id) => {
-    fetch("http://localhost:5000/like", {
+    fetch(`${SERVER}/like`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +78,7 @@ export default function Home() {
       });
   };
   const unlikePost = (id) => {
-    fetch("http://localhost:5000/unlike", {
+    fetch(`${SERVER}unlike`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +105,7 @@ export default function Home() {
 
   // function to make comment
   const makeComment = (text, id) => {
-    fetch("http://localhost:5000/comment", {
+    fetch(`${SERVER}/comment`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",

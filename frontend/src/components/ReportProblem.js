@@ -3,6 +3,7 @@ import "./ReportProblem.css";
 import { toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
+import { SERVER } from "./constants/server";
 function ReportProblem() {
   const [subject, setSubject] = useState("");
   const [description, setDescription] = useState("");
@@ -16,7 +17,7 @@ function ReportProblem() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/report-problem", {
+      const response = await fetch(`${SERVER}/api/report-problem`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

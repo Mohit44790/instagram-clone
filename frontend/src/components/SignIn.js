@@ -24,6 +24,7 @@ import {
   applestore,
   googlestore,
 } from "../components/constants/data";
+import { SERVER } from "./constants/server";
 
 export default function SignIn() {
   const { setUserLogin } = useContext(LoginContext);
@@ -54,7 +55,7 @@ export default function SignIn() {
       return;
     }
     // Sending data to server
-    fetch("http://localhost:5000/signin", {
+    fetch(`${SERVER}/signin`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

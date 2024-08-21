@@ -4,6 +4,7 @@ import "./SignUp.css";
 import { Link, useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
+import { SERVER } from "./constants/server";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export default function SignUp() {
     }
 
     // Sending data to server
-    fetch("http://localhost:5000/signup", {
+    fetch(`${SERVER}/signup`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

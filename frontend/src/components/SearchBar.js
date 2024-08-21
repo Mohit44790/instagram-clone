@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./SearchBar.css";
+import { SERVER } from "./constants/server";
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState("");
@@ -27,7 +28,7 @@ const SearchBar = ({ onSearch }) => {
 
   const handleSearch = () => {
     if (query.trim() !== "") {
-      fetch("http://localhost:5000/search-users", {
+      fetch(`${SERVER}/search-users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

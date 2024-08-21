@@ -7,7 +7,12 @@ const { mongoUrl } = require("./keys");
 const app = express();
 const port = process.env.PORT || 8000;
 
-app.use(cors());
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Import Models

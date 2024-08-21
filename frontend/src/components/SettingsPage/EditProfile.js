@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./EditProfile.css";
 import ProfilePic from "../ProfilePic";
 import { toast } from "react-toastify";
+import { SERVER } from "../constants/server";
 const EditProfile = () => {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
   const [pic, setPic] = useState([]);
@@ -19,16 +20,11 @@ const EditProfile = () => {
   };
 
   useEffect(() => {
-    fetch(
-      `http://localhost:5000/user/${
-        JSON.parse(localStorage.getItem("user"))._id
-      }`,
-      {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("jwt"),
-        },
-      }
-    )
+    fetch(`${SERVER}/user/${JSON.parse(localStorage.getItem("user"))._id}`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
       .then((res) => res.json())
       .then((result) => {
         // console.log(result);
@@ -66,7 +62,7 @@ const EditProfile = () => {
       // Send the `profileInfo` data to the backend for saving.
       // You can use an API request (e.g., fetch or Axios) to send the data to the server.
       // Make sure to update the URL and request method as needed.
-      fetch("http://localhost:5000/updateuser", {
+      fetch(`${SERVER}/updateuser`, {
         method: "PUT", // Adjust the method as per your API requirements.
         headers: {
           "Content-Type": "application/json",

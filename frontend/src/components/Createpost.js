@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Createpost.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { SERVER } from "./constants/server";
 
 export default function Createpost() {
   const [body, setBody] = useState("");
@@ -17,7 +18,7 @@ export default function Createpost() {
   useEffect(() => {
     // Saving post to MongoDB
     if (url) {
-      fetch("http://localhost:5000/createPost", {
+      fetch(`${SERVER}/createPost`, {
         method: "post",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("jwt"),

@@ -5,6 +5,7 @@ import ProfilePic from "./ProfilePic";
 import Sidenav from "./Sidenav";
 import { FiSettings } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { SERVER } from "./constants/server";
 
 export default function Profie() {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
@@ -32,16 +33,11 @@ export default function Profie() {
   };
 
   useEffect(() => {
-    fetch(
-      `http://localhost:5000/user/${
-        JSON.parse(localStorage.getItem("user"))._id
-      }`,
-      {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("jwt"),
-        },
-      }
-    )
+    fetch(`${SERVER}/user/${JSON.parse(localStorage.getItem("user"))._id}`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
       .then((res) => res.json())
       .then((result) => {
         // console.log(result);

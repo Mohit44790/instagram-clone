@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 // import PostDetail from "./PostDetail";
 import "./Profile.css";
 import { useParams } from "react-router-dom";
+import { SERVER } from "./constants/server";
 
 export default function UserProfie() {
   var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
@@ -12,7 +13,7 @@ export default function UserProfie() {
 
   // to follow user
   const followUser = (userId) => {
-    fetch("http://localhost:5000/follow", {
+    fetch(`${SERVER}/follow`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +32,7 @@ export default function UserProfie() {
 
   // to unfollow user
   const unfollowUser = (userId) => {
-    fetch("http://localhost:5000/unfollow", {
+    fetch(`${SERVER}/unfollow`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +52,7 @@ export default function UserProfie() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/user/${userid}`, {
+    fetch(`${SERVER}/user/${userid}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
